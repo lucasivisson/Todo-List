@@ -60,6 +60,10 @@
   text-align: start;
   font-size: 0.875rem;
   font-weight: bold;
+  color: var(--purple);
+}
+
+.legend:first-child {
   color: var(--blue);
 }
 
