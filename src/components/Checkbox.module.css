@@ -1,0 +1,30 @@
+.checkboxBox {
+  margin-top: 1rem;
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  height: 4rem;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.checkboxBox:first-child {
+  margin-top: 1.5rem;
+}
+
+.checkboxBox button {
+  background: none;
+  border: none;
+  color: var(--gray-300);
+  margin: 0 1rem;
+}
+
+.checkboxInput {
+  margin: 0 1rem;
+  background: var(--gray-500);
+  border-radius: 10rem;
+  border: var(--blue);
+  text-decoration: none;
+}
