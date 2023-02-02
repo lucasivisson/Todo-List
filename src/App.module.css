@@ -38,6 +38,14 @@
   gap: 0.25rem;
   color: var(--gray-100);
   font-size: 0.875rem;
+  cursor: pointer;
+  -webkit-transition: background 0.1s linear;
+  -ms-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+.task button:hover {
+  background: var(--purple-dark);
 }
 
 .main {
@@ -77,4 +85,14 @@
   display: inline;
   border-radius: 0.8rem;
   padding: 0.2rem 0.5rem;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 4.5rem;
+  border-radius: 0.3rem;
+  box-shadow: 0rem -0.1rem var(--gray-400);
 }
