@@ -2,16 +2,23 @@ import { Trash } from 'phosphor-react';
 import styles from './Checkbox.module.css';
 
 type CheckboxType = {
-  numberName: string,
-  body: string
+  id: number,
+  description: string,
+  marked: boolean,
+  onFinishTask: (id: number) => void;
 }
 
-export function Checkbox({numberName, body}: CheckboxType) {
+export function Checkbox({id, description, marked, onFinishTask}: CheckboxType) {
+  console.log(marked);
+  function handleFinishTask() {
+    onFinishTask(id);
+  }
+
   return (
     <div className={styles.checkboxBox}>
       <div className={styles.checkboxInputLabel}>
-        <input type="checkbox" name={"checkbox-" + numberName} className={styles.checkboxInput}/>
-        <label htmlFor={"checkbox-" + numberName}>{body}</label>
+        <input type="checkbox" name={"checkbox-" + id} className={styles.checkboxInput} onChange={handleFinishTask}/>
+        <label htmlFor={"checkbox-" + id} className={marked ? styles.checkboxLabel : undefined}>{description}</label>
       </div>
       <button><Trash/></button>
     </div>

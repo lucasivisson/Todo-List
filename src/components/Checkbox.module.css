@@ -50,9 +50,14 @@
   border-radius: 10rem;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
-  box-shadow: inset 1rem 1rem var(--purple);
+  box-shadow: inset 1rem 1rem var(--purple-dark);
 }
 
 .checkboxInput:checked::before {
   transform: scale(1);
+}
+
+.checkboxLabel { 
+  text-decoration: line-through;
+  color: var(--gray-300);
 }
