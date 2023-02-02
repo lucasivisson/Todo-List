@@ -9,7 +9,7 @@ type CheckboxType = {
 export function Checkbox({numberName, body}: CheckboxType) {
   return (
     <div className={styles.checkboxBox}>
-      <div>
+      <div className={styles.checkboxInputLabel}>
         <input type="checkbox" name={"checkbox-" + numberName} className={styles.checkboxInput}/>
         <label htmlFor={"checkbox-" + numberName}>{body}</label>
       </div>
