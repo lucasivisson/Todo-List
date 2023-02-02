@@ -34,12 +34,25 @@
   width: 1.15rem;
   height: 1.15rem;
   border: 0.15rem solid var(--blue);
-  appearance: none;
+  appearance: unset;
   cursor: pointer;
   display: grid;
   place-content: center;
 }
 
 .checkboxInput::before {
-  content: "";
+  content: "✔";
+  font-size: 0.8rem;
+  text-align: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--gray-100);
+  border-radius: 10rem;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1rem 1rem var(--purple);
+}
+
+.checkboxInput:checked::before {
+  transform: scale(1);
 }
