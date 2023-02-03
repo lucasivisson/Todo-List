@@ -6,12 +6,16 @@ type CheckboxType = {
   description: string,
   marked: boolean,
   onFinishTask: (id: number) => void;
+  onRemoveTask: (id: number) => void;
 }
 
-export function Checkbox({id, description, marked, onFinishTask}: CheckboxType) {
-  console.log(marked);
+export function Checkbox({id, description, marked, onFinishTask, onRemoveTask}: CheckboxType) {
   function handleFinishTask() {
     onFinishTask(id);
+  }
+
+  function handleRemoveTask() {
+    onRemoveTask(id);
   }
 
   return (
@@ -20,7 +24,7 @@ export function Checkbox({id, description, marked, onFinishTask}: CheckboxType) 
         <input type="checkbox" name={"checkbox-" + id} className={styles.checkboxInput} onChange={handleFinishTask}/>
         <label htmlFor={"checkbox-" + id} className={marked ? styles.checkboxLabel : undefined}>{description}</label>
       </div>
-      <button><Trash/></button>
+      <button onClick={handleRemoveTask}><Trash/></button>
     </div>
   )
 }

@@ -15,6 +15,7 @@ type taskType = {
 export function App() {
   const [tasks, setTasks] = useState<taskType[]>([]);
   const [taskText, setTaskText] = useState<string>('');
+  const [numberOfConcludedTasks, setNumberOfConcludedTasks] = useState<number>(0);
 
   function handleNewTaskChange(event: React.ChangeEvent<HTMLInputElement>) {
     setTaskText(event.target.value);
@@ -29,8 +30,29 @@ export function App() {
     const tasksUpdated = tasks.map(task => {
       if(task.id === id) {
         task.marked = !task.marked;
+        setNumberOfConcludedTasks((state) => {
+          if(task.marked) {
+            return state + 1;
+          } else {
+            return state - 1;
+          }
+        })
       }
       return task;
+    });
+
+    setTasks(tasksUpdated);
+  }
+
+  function handleRemoveTask(id: number) {
+    const tasksUpdated = tasks.filter(task => {
+      if(task.id !== id) {
+        return task;
+      } else {
+        setNumberOfConcludedTasks((state) => {
+          return state - 1;
+        })
+      }
     });
 
     setTasks(tasksUpdated);
@@ -42,25 +64,25 @@ export function App() {
       <div className={styles.wrapper}>
         <div className={styles.task}>
           <input type="text" placeholder="Adicione uma nova tarefa" name="task" onChange={handleNewTaskChange} value={taskText}/>
-          <button onClick={handleNewTask}>Criar <PlusCircle/></button>
+          <button onClick={handleNewTask}>Criar <PlusCircle size={20}/></button>
         </div>
         <div className={styles.main}>
           <main className={styles.formBox}>
             <fieldset>
               <p className={styles.legend}>
-                Tarefas criadas <div className={styles.taskCounter}>5</div>
+                Tarefas criadas <div className={styles.taskCounter}>{tasks.length}</div>
               </p>
               <p className={styles.legend}>
-                Concluídas <div className={styles.taskCounter}>2 de 5</div>
+                Concluídas <div className={styles.taskCounter}>{numberOfConcludedTasks} de {tasks.length}</div>
               </p>
-              <div>
+              <div className={tasks.length === 0 ? styles.displayNone : undefined}>
                 {tasks.map(task => {
                   return (
-                    <Checkbox key={task.id} id={task.id} description={task.description} marked={task.marked} onFinishTask={handleFinishTask} />
+                    <Checkbox key={task.id} id={task.id} description={task.description} marked={task.marked} onFinishTask={handleFinishTask} onRemoveTask={handleRemoveTask} />
                   );
                 })}
               </div>
-              <div className={styles.empty}>
+              <div className={tasks.length === 0 ? styles.empty : `${styles.empty} ${styles.displayNone}` }>
                 <img src={emptyIcon} alt="Logo To Do List" />
                 <p>Você ainda não tem tarefas cadastradas</p>
                 <p>Crie tarefas e organize seus itens a fazer</p>
