@@ -4,7 +4,7 @@ import styles from './App.module.css'
 import { PlusCircle } from 'phosphor-react'
 import { Checkbox } from './components/Checkbox';
 import emptyIcon from './assets/clipboard.svg';
-import { useState } from 'react';
+import React, { InvalidEvent, useState } from 'react';
 
 type taskType = {
   id: number,
@@ -19,9 +19,11 @@ export function App() {
 
   function handleNewTaskChange(event: React.ChangeEvent<HTMLInputElement>) {
     setTaskText(event.target.value);
+    event.target.setCustomValidity('');
   }
 
-  function handleNewTask() {
+  function handleNewTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setTasks([...tasks, { id: tasks.length + 1, description: taskText, marked: false}]);
     setTaskText('');
   }
@@ -58,14 +60,18 @@ export function App() {
     setTasks(tasksUpdated);
   }
 
+  function handleInvalidForm(event: React.ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Preencha o campo corretamente!');
+  }
+
   return (
     <div>
       <Header></Header>
       <div className={styles.wrapper}>
-        <div className={styles.task}>
-          <input type="text" placeholder="Adicione uma nova tarefa" name="task" onChange={handleNewTaskChange} value={taskText}/>
-          <button onClick={handleNewTask}>Criar <PlusCircle size={20}/></button>
-        </div>
+        <form onSubmit={handleNewTask} className={styles.task}>
+          <input type="text" required placeholder="Adicione uma nova tarefa" name="task" onChange={handleNewTaskChange} value={taskText} onInvalid={handleInvalidForm}/>
+          <button type="submit">Criar <PlusCircle size={20}/></button>
+        </form>
         <div className={styles.main}>
           <main className={styles.formBox}>
             <fieldset>
