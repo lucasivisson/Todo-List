@@ -97,6 +97,10 @@
   box-shadow: 0rem -0.1rem var(--gray-400);
 }
 
+.fontBold {
+  font-weight: bold;
+}
+
 .displayNone {
   display: none;
 }

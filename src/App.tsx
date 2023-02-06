@@ -90,7 +90,7 @@ export function App() {
               </div>
               <div className={tasks.length === 0 ? styles.empty : `${styles.empty} ${styles.displayNone}` }>
                 <img src={emptyIcon} alt="Logo To Do List" />
-                <p>Você ainda não tem tarefas cadastradas</p>
+                <p className={styles.fontBold}>Você ainda não tem tarefas cadastradas</p>
                 <p>Crie tarefas e organize seus itens a fazer</p>
               </div>
             </fieldset>
